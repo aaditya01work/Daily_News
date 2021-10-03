@@ -6,6 +6,10 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const Browsing = require("../models/Browsing");
 
+/**
+ * this, is a route for registering users using JWT
+ * tokens, it is not secu8re at all.
+ */
 router.post(
   "/register",
   [
@@ -30,6 +34,7 @@ router.post(
         noPhone: false,
       };
 
+      // here, we are more or less validating user info
       let newUser = await User.findOne({ email });
       if (newUser) {
         validator.noEmail = true;
@@ -85,6 +90,7 @@ router.post(
               console.log("wtf");
               throw err;
             }
+            // this is where we acctually send tokens
             res.json({ token });
           }
         );
