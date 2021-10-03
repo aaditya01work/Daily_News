@@ -4,6 +4,12 @@ const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("38b943e5c1ea4d2cb89a3ae390e644c4");
 // 6dd98f20e4be4c3c82484a72119c77c7
 // 8de0a886e62c4bf6be4122b730e97e72
+
+/**
+ * The newsAPI does now let us use it in frontend,
+ * so we created some routes, in order to access the
+ * API data, by making an abstraction in backend.
+ */
 router.get("/headlines", auth, (req, res) => {
   newsapi.v2
     .topHeadlines({
