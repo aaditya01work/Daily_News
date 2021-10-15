@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const Browsing = require('../models/Browsing')
 
+/**
+ * this, is a route for registering users using JWT
+ * tokens, it is not secu8re at all.
+ */
 router.post(
     '/register',
     [
@@ -32,38 +36,35 @@ router.post(
                 noPhone: false,
             }
 
-            let newUser = await User.findOne({ email })
-            if (newUser) {
-                validator.noEmail = true
-                console.log(6)
-                return res.status(400).json({ msg: 'Invalid Email' })
-            }
-            newUser = await User.findOne({ username })
-            if (newUser) {
-                validator.noUsername = true
-                console.log(5)
-                return res.status(400).json({ msg: 'Invalid Username' })
-            }
-            newUser = await User.findOne({ phone })
-            if (newUser) {
-                validator.noPhone = true
-                console.log(4)
-                return res.status(400).json({ msg: 'Invalid Phone' })
-            }
-            if (
-                !validator.noEmail &&
-                !validator.noUsername &&
-                !validator.noPhone
-            ) {
-                const salt = await bcrypt.genSalt(10)
-                newUser = new User({
-                    username,
-                    email,
-                    password,
-                    phone,
-                })
-                const hashedPassword = await bcrypt.hash(password, salt)
-                newUser.password = hashedPassword
+      // here, we are more or less validating user info
+      let newUser = await User.findOne({ email });
+      if (newUser) {
+        validator.noEmail = true;
+        console.log(6);
+        return res.status(400).json({ msg: "Invalid Email" });
+      }
+      newUser = await User.findOne({ username });
+      if (newUser) {
+        validator.noUsername = true;
+        console.log(5);
+        return res.status(400).json({ msg: "Invalid Username" });
+      }
+      newUser = await User.findOne({ phone });
+      if (newUser) {
+        validator.noPhone = true;
+        console.log(4);
+        return res.status(400).json({ msg: "Invalid Phone" });
+      }
+      if (!validator.noEmail && !validator.noUsername && !validator.noPhone) {
+        const salt = await bcrypt.genSalt(10);
+        newUser = new User({
+          username,
+          email,
+          password,
+          phone,
+        });
+        const hashedPassword = await bcrypt.hash(password, salt);
+        newUser.password = hashedPassword;
 
                 await newUser.save()
 
@@ -95,11 +96,16 @@ router.post(
                     },
                 )
             }
-        } catch (err) {
-            console.error(err.message)
-            res.status(500).send('ERRORS!!')
-        }
-    },
-)
+            // this is where we acctually send tokens
+            res.json({ token });
+          }
+        );
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("ERRORS!!");
+    }
+  }
+);
 
 module.exports = router
