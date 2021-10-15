@@ -94,6 +94,7 @@ body-parser@1.19.0:
     type-is "~1.6.17"
 
 bson@*:
+
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/bson/-/bson-4.5.2.tgz#567b4ee94372d5284a4d6c47fb6e1cc711ae76ba"
   integrity sha512-8CEMJpwc7qlQtrn2rney38jQSEeMar847lz0LyitwRmVknAW8iHXrzW4fTjHfyWm0E3sukyD/zppdH+QU1QefA==
@@ -203,6 +204,7 @@ cookie@0.4.0:
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
 core-js@^3.6.5:
+
   version "3.18.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.18.1.tgz#289d4be2ce0085d40fc1244c0b1a54c00454622f"
   integrity sha512-vJlUi/7YdlCZeL6fXvWNaLUPh/id12WXj3MbkMw5uOyF0PfWPBNOCNbs53YqgrvtujLNlt9JQpruyIKkUZ+PKA==
@@ -211,6 +213,15 @@ core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
+
+
+cors@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+  dependencies:
+    object-assign "^4"
+    vary "^1"
 
 date-fns@^2.0.1:
   version "2.24.0"
@@ -607,10 +618,11 @@ minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
-mongodb@3.6.11:
-  version "3.6.11"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.11.tgz#8a59a0491a92b00a8c925f72ed9d9a5b054aebb2"
-  integrity sha512-4Y4lTFHDHZZdgMaHmojtNAlqkvddX2QQBEN0K//GzxhGwlI9tZ9R0vhbjr1Decw+TF7qK0ZLjQT292XgHRRQgw==
+mongodb@3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.7.2.tgz#d0d43b08ff1e5c13f4112175e321fa292cf35a3d"
+  integrity sha512-/Qi0LmOjzIoV66Y2JQkqmIIfFOy7ZKsXnQNlUXPFXChOw3FCdNqVD5zvci9ybm6pkMe/Nw+Rz9I0Zsk2a+05iQ==
+
   dependencies:
     bl "^2.2.1"
     bson "^1.1.4"
@@ -626,9 +638,9 @@ mongoose-legacy-pluralize@1.0.2:
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
 mongoose@^5.9.15:
-  version "5.13.9"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.13.9.tgz#4421a13566daea8fcc80149734c76e5641f477ce"
-  integrity sha512-JbLw5ie0LJxm7V9LoNxRY//6cyFJf0cOpON2TWUWvF9pabil6ArfECL3xHV2N+mwwO4gXiIa+c0pwTzDUVTgqw==
+  version "5.13.11"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.13.11.tgz#4f6fc4959310d0c31606fdec19b6f25f8ebbb50a"
+  integrity sha512-hVHm864eBpaCr0W6CF7qTmC62dmepnT+A6ZnqKPU9asw7jjYHBcBxPgCnrGBMUACbZtzidO6HmB4J3F1YU2rdg==
   dependencies:
     "@types/bson" "1.x || 4.0.x"
     "@types/mongodb" "^3.5.27"
@@ -710,6 +722,11 @@ normalize-package-data@^2.3.2:
     resolve "^1.10.0"
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
+
+object-assign@^4:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 on-finished@~2.3.0:
   version "2.3.0"

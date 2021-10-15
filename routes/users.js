@@ -1,38 +1,40 @@
-const router = require("express").Router();
-const User = require("../models/User");
-const { check, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const Browsing = require("../models/Browsing");
+const router = require('express').Router()
+const User = require('../models/User')
+const { check, validationResult } = require('express-validator')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const config = require('config')
+const Browsing = require('../models/Browsing')
 
 /**
  * this, is a route for registering users using JWT
  * tokens, it is not secu8re at all.
  */
 router.post(
-  "/register",
-  [
-    check("username", "Please enter username").not().isEmpty(),
-    check("email", "Please enter your email address").isEmail(),
-    check("password", "Please enter min 6 charcters for password").isLength({
-      min: 6,
-    }),
-  ],
-  async (req, res) => {
-    const Errors = validationResult(req);
+    '/register',
+    [
+        check('username', 'Please enter username').not().isEmpty(),
+        check('email', 'Please enter your email address').isEmail(),
+        check('password', 'Please enter min 6 charcters for password').isLength(
+            {
+                min: 6,
+            },
+        ),
+    ],
+    async (req, res) => {
+        const Errors = validationResult(req)
 
-    if (!Errors.isEmpty()) {
-      console.log("found");
-      return res.status(400).json({ errors: Errors.array() });
-    }
-    const { username, email, password, phone } = req.body;
-    try {
-      let validator = {
-        noEmail: false,
-        noUsername: false,
-        noPhone: false,
-      };
+        if (!Errors.isEmpty()) {
+            console.log('found')
+            return res.status(400).json({ errors: Errors.array() })
+        }
+        const { username, email, password, phone } = req.body
+        try {
+            let validator = {
+                noEmail: false,
+                noUsername: false,
+                noPhone: false,
+            }
 
       // here, we are more or less validating user info
       let newUser = await User.findOne({ email });
@@ -64,31 +66,35 @@ router.post(
         const hashedPassword = await bcrypt.hash(password, salt);
         newUser.password = hashedPassword;
 
-        await newUser.save();
+                await newUser.save()
 
-        const browsingD = new Browsing({
-          query: "",
-          page: "",
-          user: newUser.id,
-        });
+                const browsingD = new Browsing({
+                    query: '',
+                    page: '',
+                    user: newUser.id,
+                })
 
-        await browsingD.save();
+                await browsingD.save()
 
-        const payload = {
-          user: {
-            id: newUser.id,
-          },
-        };
-        jwt.sign(
-          payload,
-          config.get("Secret"),
-          {
-            expiresIn: 360000,
-          },
-          (err, token) => {
-            if (err) {
-              console.log("wtf");
-              throw err;
+                const payload = {
+                    user: {
+                        id: newUser.id,
+                    },
+                }
+                jwt.sign(
+                    payload,
+                    config.get('Secret'),
+                    {
+                        expiresIn: 360000,
+                    },
+                    (err, token) => {
+                        if (err) {
+                            console.log('wtf')
+                            throw err
+                        }
+                        res.json({ token })
+                    },
+                )
             }
             // this is where we acctually send tokens
             res.json({ token });
@@ -102,4 +108,4 @@ router.post(
   }
 );
 
-module.exports = router;
+module.exports = router
